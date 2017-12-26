@@ -22,9 +22,13 @@ typedef struct Player{
 	int maxVspd;
 	double tJump;
 	bool canJump;
+	int img[10];
+	int sprite;
+	int imgIndex;
+	bool mirror;
 } Player;
 
-Player newPlayer(const int, const int);
+Player newPlayer(Window*, const int, const int);
 
 bool collidePlayerBlocks(const int, const int, const Player, const Blocks);
 
