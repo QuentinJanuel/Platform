@@ -7,8 +7,19 @@ void startSDL(void){
 }
 
 void endSDL(Window *w){
+	int i = 0;
+	for(; i < w->allImages.loaded; i++){
+		SDL_FreeSurface(w->allImages.image[i]);
+	}
+	free(w->allImages.image);
 	free(w);
 	SDL_Quit();
+}
+
+void initializeImages(Window *w, const int max){
+	w->allImages.maxNumber = max;
+	w->allImages.loaded = 0;
+	w->allImages.image = malloc(sizeof(SDL_Surface)*w->allImages.maxNumber);
 }
 
 Window *createWindow(const int width, const int height, const char *title, const int FPS){
@@ -19,6 +30,7 @@ Window *createWindow(const int width, const int height, const char *title, const
 	w->FPS = FPS;
 	w->pTime = 0;
 	w->screen = SDL_SetVideoMode(w->width, w->height, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	initializeImages(w, 50);
 	if(w->screen == NULL){
 		SDL_ERROR()
 	}
@@ -64,4 +76,19 @@ void drawRect(Window *w, const int x, const int y, const int width, const int he
 	SDL_FillRect(r, NULL, w->color); 
 	SDL_BlitSurface(r, NULL, w->screen, &p);
 	SDL_FreeSurface(r);
+}
+
+int loadImage(Window *w, const char *file){
+	SDL_Surface *img = IMG_Load(file);
+	if(img == NULL){
+		SDL_ERROR()
+	}
+	w->allImages.image[w->allImages.loaded] = img;
+	return w->allImages.loaded++;
+}
+
+void drawImage(Window *w, const int img, const int x, const int y){
+	SDL_Rect p = {x, y};
+	SDL_SetAlpha(w->allImages.image[img], SDL_SRCALPHA, w->alpha*0xFF);
+	SDL_BlitSurface(w->allImages.image[img], NULL, w->screen, &p);
 }
