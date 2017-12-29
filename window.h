@@ -1,6 +1,7 @@
 #ifndef WINDOW
 #define WINDOW
 
+#include <bool.h>
 #include <SDL_image.h>
 
 #define SDL_ERROR()	fprintf(stderr, "Error: %s\n", SDL_GetError()); \
@@ -18,9 +19,10 @@ typedef struct Window{
 	int width;
 	int height;
 	int FPS;
-	unsigned int pTime;
 	double alpha;
 	Images allImages;
+	SDL_Event events;
+	bool closed;
 } Window;
 
 typedef struct RGB{
@@ -37,7 +39,7 @@ void setAlpha(Window*, const double);
 
 void startSDL(void);
 
-void endSDL(Window *w);
+void closeWindow(Window *w);
 
 void initializeImages(Window*, const int);
 
@@ -50,5 +52,7 @@ void drawRect(Window*, const int, const int, const int, const int);
 int loadImage(Window*, const char*);
 
 void drawImage(Window*, const int, const int, const int);
+
+void checkForClose(Window*);
 
 #endif //WINDOW

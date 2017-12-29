@@ -26,4 +26,6 @@ void drawAllBlocks(Window*, const Blocks);
 
 void newBlock(Blocks*, const int, const int, const int, const int);
 
+void freeBlocks(Blocks*);
+
 #endif //BLOCK

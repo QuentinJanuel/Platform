@@ -3,6 +3,7 @@
 
 #include <bool.h>
 #include <SDL.h>
+#include "window.h"
 
 typedef struct Keyboard{
 	bool up;
@@ -11,6 +12,8 @@ typedef struct Keyboard{
 	bool right;
 } Keyboard;
 
-void getKey(bool*, const SDL_Event, const SDLKey);
+void getKey(const SDL_Event, bool*, const SDLKey);
+
+void handleKeyboard(Window*, Keyboard*);
 
 #endif //KEYBOARD

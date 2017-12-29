@@ -2,7 +2,6 @@
 
 Player newPlayer(Window *w, const int x, const int y){
 	Player p = {x, y};
-	p.color = 0x0A0;
 	p.width = 18;
 	p.height = 25;
 	p.spd = 3;
@@ -70,6 +69,5 @@ void updatePlayer(const Keyboard key, Player *p, const Blocks blocks){
 }
 
 void drawPlayer(Window *w, const Player p){
-	setColor(w, p.color);
 	drawImage(w, p.img[p.sprite+3*p.mirror], p.x-25, p.y-22);
 }

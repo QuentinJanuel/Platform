@@ -11,7 +11,6 @@
 typedef struct Player{
 	int x;
 	int y;
-	int color;
 	int width;
 	int height;
 	int spd;

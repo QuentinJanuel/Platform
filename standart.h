@@ -5,4 +5,6 @@
 
 bool sign(const int);
 
+void swap(int*, int*);
+
 #endif //STANDART

@@ -6,7 +6,7 @@ void startSDL(void){
 	}
 }
 
-void endSDL(Window *w){
+void closeWindow(Window *w){
 	int i = 0;
 	for(; i < w->allImages.loaded; i++){
 		SDL_FreeSurface(w->allImages.image[i]);
@@ -28,7 +28,7 @@ Window *createWindow(const int width, const int height, const char *title, const
 	w->width = width;
 	w->height = height;
 	w->FPS = FPS;
-	w->pTime = 0;
+	w->closed = false;
 	w->screen = SDL_SetVideoMode(w->width, w->height, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	initializeImages(w, 50);
 	if(w->screen == NULL){
@@ -91,4 +91,10 @@ void drawImage(Window *w, const int img, const int x, const int y){
 	SDL_Rect p = {x, y};
 	SDL_SetAlpha(w->allImages.image[img], SDL_SRCALPHA, w->alpha*0xFF);
 	SDL_BlitSurface(w->allImages.image[img], NULL, w->screen, &p);
+}
+
+void checkForClose(Window *w){
+	SDL_Event e = w->events;
+	if(e.type == SDL_QUIT || (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE))
+		w->closed = true;
 }

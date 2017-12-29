@@ -31,3 +31,7 @@ void drawAllBlocks(Window *w, const Blocks allBlocks){
 void newBlock(Blocks *blocks, const int x, const int y, const int width, const int height){
 	blocks->b[blocks->number++] = createBlock(x, y, width, height);
 }
+
+void freeBlocks(Blocks *blocks){
+	free(blocks->b);
+}
