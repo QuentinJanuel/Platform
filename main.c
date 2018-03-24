@@ -7,9 +7,6 @@
 #include "level.h"
 #include "editor.h"
 
-//Quentin est passé par là
-//Lol
-//Test
 
 int main(int argc, char *argv[]){
 	Window *win = createWindow(800, 608, "Super Mario", 70);
