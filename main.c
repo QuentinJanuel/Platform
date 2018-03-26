@@ -8,6 +8,7 @@
 #include "editor.h"
 
 //Coucou je suis passé par là
+//Another test
 
 int main(int argc, char *argv[]){
 	Window *win = createWindow(800, 608, "Super Mario", 70);
